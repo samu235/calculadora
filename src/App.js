@@ -9,7 +9,14 @@ function App() {
   const [operation, setOperation] = useState("")
   const [var1, setVar1] = useState("")
   const [var2, setVar2] = useState("")
-  const [result ,setResult] = useState("0")
+  const [result, setResult] = useState("0")
+  const [error, setError] = useState("")
+
+  function maxSize(){
+    if((var1 + operation + var2).length>20 ||result.length>20){
+      setError("muy largo")
+    }
+  }
 
   function touchNum(num) {
     if (operation === "") {
@@ -17,47 +24,59 @@ function App() {
     } else {
       setVar2(var2 + num)
     }
+    maxSize()
   }
   function touchOpt(opt) {
     if (var1.length > 0 && var2.length === 0) {
       setOperation(opt)
-    } else if (var1.length > 0){
+    } else if (var1.length > 0) {
       setVar1(result)
       setOperation(opt)
       setVar2("")
       //setResult("0")
 
+    } else if (var1.length === 0) {
+      setVar1(var1 + opt)
     }
-
+    maxSize()
   }
   function total() {
     let result = 0;
-
-    if (operation === "+") {
-      result = Number(var1) + Number(var2)
-    } else if(operation === "-"){
-      result = Number(var1) - Number(var2)
-    } else if(operation === "/"){
-      result = Number(var1) / Number(var2)
-    } else if(operation === "x"){
-      result = Number(var1) * Number(var2)
+    try {
+      if (operation === "+") {
+        result = Number(var1) + Number(var2)
+      } else if (operation === "-") {
+        result = Number(var1) - Number(var2)
+      } else if (operation === "/") {
+        result = Number(var1) / Number(var2)
+      } else if (operation === "x") {
+        result = Number(var1) * Number(var2)
+      }
+      if (isNaN(result)) {
+        setError("resultado NAN")
+      }
+      setResult(result.toString())
+      maxSize()
+    } catch (error) {
+      setError(error)
     }
-    setResult(result.toString())
-    
+
+
   }
   function clear() {
     setResult("0")
     setVar1("")
     setVar2("")
     setOperation("")
+    setError("")
 
   }
   return (
     <div className="App">
       <div className='tecladoDefault teclado'>
         <div className='pantalla'>
-          <div className='display'>{var1 + operation + var2}</div>
-          <div className='display'>{result}</div>
+          <div className='display'>{(error?.length > 0) ? "Error" : (var1 + operation + var2)}</div>
+          <div className='display'>{(error?.length > 0) ? error : (result)}</div>
         </div>
         <div className='tecladoDefault tecladoNum'>
           <Key titel={"c"} click={clear} />
@@ -73,7 +92,7 @@ function App() {
           <Key titel={"2"} click={() => touchNum("2")} />
           <Key titel={"3"} click={() => touchNum("3")} />
           <Keyw titel={"0"} click={() => touchNum("0")} />
-          <Key titel={","}click={() => touchNum(".")} />
+          <Key titel={","} click={() => touchNum(".")} />
         </div>
         <div className='tecladoDefault tecladoNum2' >
           <Key titel={"-"} click={() => touchOpt("-")} />
