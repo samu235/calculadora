@@ -30,11 +30,9 @@ function App() {
     if (var1.length > 0 && var2.length === 0) {
       setOperation(opt)
     } else if (var1.length > 0) {
-      setVar1(result)
+      setVar1(total())
       setOperation(opt)
       setVar2("")
-      //setResult("0")
-
     } else if (var1.length === 0) {
       setVar1(var1 + opt)
     }
@@ -61,7 +59,7 @@ function App() {
       setError(error)
     }
 
-
+    return result.toString()
   }
   function clear() {
     setResult("0")
@@ -73,15 +71,17 @@ function App() {
   }
   return (
     <div className="App">
+      
       <div className='tecladoDefault teclado'>
+      <div className='myName'> By Samuel</div>
         <div className='pantalla'>
           <div className='display'>{(error?.length > 0) ? "Error" : (var1 + operation + var2)}</div>
           <div className='display'>{(error?.length > 0) ? error : (result)}</div>
         </div>
         <div className='tecladoDefault tecladoNum'>
-          <Key titel={"c"} click={clear} />
-          <Key titel={"/"} click={() => touchOpt("/")} />
-          <Key titel={"x"} click={() => touchOpt("x")} />
+          <Key titel={"AC"} click={clear} type="clear"/>
+          <Key titel={"/"} click={() => touchOpt("/")} type="funtion" />
+          <Key titel={"X"} click={() => touchOpt("x")} type="funtion"/>
           <Key titel={"7"} click={() => touchNum("7")} />
           <Key titel={"8"} click={() => touchNum("8")} />
           <Key titel={"9"} click={() => touchNum("9")} />
@@ -95,9 +95,9 @@ function App() {
           <Key titel={","} click={() => touchNum(".")} />
         </div>
         <div className='tecladoDefault tecladoNum2' >
-          <Key titel={"-"} click={() => touchOpt("-")} />
-          <Keyh titel={"+"} click={() => touchOpt("+")} />
-          <Keyh titel={"Enter"} click={total} />
+          <Key titel={"-"} click={() => touchOpt("-")} type="funtion"/>
+          <Keyh titel={"+"} click={() => touchOpt("+")} type="funtion"/>
+          <Keyh titel={"Enter"} click={total} type="funtion"/>
         </div>
 
       </div>
