@@ -1,38 +1,37 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tecladoDefault {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-flow: row wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.teclado {
+  background-color: black;
+  width: 400px
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tecladoNum {
+  width: 300px;
+}
+
+.tecladoNum2 {
+  width: 100px;
+}
+
+.pantalla {
+  width: 400px;
+  height: 90px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(137, 255, 137);
+  margin: 10px;
+}
+
+.display {
+  height: 50%;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align:right;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
