@@ -33,7 +33,7 @@ function App() {
       setVar1(total())
       setOperation(opt)
       setVar2("")
-    } else if (var1.length === 0) {
+    } else if (var1.length === 0 && opt === "-") {
       setVar1(var1 + opt)
     }
     maxSize()
