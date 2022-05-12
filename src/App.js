@@ -50,8 +50,10 @@ function App() {
       } else if (operation === "x") {
         result = Number(var1) * Number(var2)
       }
-      if (isNaN(result)) {
+      if (isNaN(result) ) {
         setError("resultado NAN")
+      }else if(!isFinite(result)){
+        setError("infito")
       }
       setResult(result.toString())
       maxSize()
